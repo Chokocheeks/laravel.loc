@@ -33,19 +33,18 @@ Route::prefix('/admin')->group(function(){
     // Categories
     Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index'])
     ->name('categories.index');
-    Route::get('/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    Route::get('/categories/create', [CategoryController::class, 'create']);
-    
-    Route::post('/categories/create', [CategoryController::class, 'store']);
-    
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit']);
-    
-    Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
-    
-    Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
-
     Route::resource('categories', CategoryController::class)
     ->except(['show']);
+    // Route::get('/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
+    // Route::get('/categories/create', [CategoryController::class, 'create']);
+    
+    // Route::post('/categories/create', [CategoryController::class, 'store']);
+    
+    // Route::get('/categories/{category}/edit', [CategoryController::class, 'edit']);
+    
+    // Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
+    
+    // Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
 
     // Product
     // Route::get('/product', [ProductController::class, 'index'])->name('product.index');
