@@ -15,7 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // $count = Product::all()->count();   //первый способ !нерекомендуется
+        // $perPage = 15;
+        // $pages = ceil($count/$perPage);
+
+        //$products = Product::simplePaginate();    //не узнает кол-во страниц
+        $products = Product::paginate();    //узнает кол-во страниц и выводит кнопки
+        return view('admin.products.index', compact('products'));
     }
 
     /**
