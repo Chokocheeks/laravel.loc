@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\MyController;
+// use App\Http\Controllers\Admin\product\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +31,31 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('/admin')->group(function(){
+    // Categories
     Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index'])
     ->name('categories.index');
-    
-
     Route::resource('categories', CategoryController::class)
     ->except(['show']);
+    Route::resources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class,
+    ]);
+
+
+
+
+
+    // Route::get('/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
+    // Route::get('/categories/create', [CategoryController::class, 'create']);
+    
+    // Route::post('/categories/create', [CategoryController::class, 'store']);
+    
+    // Route::get('/categories/{category}/edit', [CategoryController::class, 'edit']);
+    
+    // Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
+    
+    // Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
+
+    // Product
+    // Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 });

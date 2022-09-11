@@ -11,4 +11,5 @@ class MyController extends Controller
         return view('admin.dashboard');
     }
 
+    
 }
