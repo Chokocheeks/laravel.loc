@@ -61,7 +61,7 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(ArticleRequest $article)
     {
         return view('admin.articles.edit');
     }

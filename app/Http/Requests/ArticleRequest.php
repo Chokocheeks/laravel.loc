@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class ArticleRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:20',
             'content' => 'required|min:70',
-            'image' => 'file|size:512|image, mimes:jpg,bmp,png,gif,svg,webp'
+            'image' => 'file|size:512|image|' //mimes:jpg,bmp,png,gif,svg,webp
         ];
     }
 
