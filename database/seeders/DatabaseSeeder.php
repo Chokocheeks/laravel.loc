@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(CategorySeeder::class); //запускает все пользовательские Seeders
         $this->call([
             CategorySeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            ArticleSeeder::class
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

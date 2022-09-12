@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\MyController;
 // use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -32,13 +34,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('/admin')->group(function(){
     // Categories
-    Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index'])
-    ->name('categories.index');
-    Route::resource('categories', CategoryController::class)
-    ->except(['show']);
+    Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index']);
+    // Route::resource('categories', CategoryController::class)
+    // ->except(['show']);
     Route::resources([
         'categories' => CategoryController::class,
         'products' => ProductController::class,
+        'articles' => ArticleController::class
     ]);
 
 
