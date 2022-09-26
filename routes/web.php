@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MyController;
 // use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\StoreController;
 use App\Http\Middleware\MyMiddleware;
 use App\Models\Article;
 use App\Models\Category;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Storage;
 */
 
  Route::get('/', SiteController::class);
+ Route::get('/catalog', StoreController::class);
 // Route::get('/', function () {
     
 //     // Storage::temporaryUrl('1.txt', now()->addMinutes(5));

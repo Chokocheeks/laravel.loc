@@ -1,8 +1,7 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
         @extends('layouts.site')
         @section('content')
-            
-      
+
         <!-- SECTION -->
 		<div class="section">
 			<!-- container -->
