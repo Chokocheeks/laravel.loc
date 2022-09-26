@@ -6,10 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\MyController;
 // use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\SiteController;
+use App\Http\Middleware\MyMiddleware;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,19 +25,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $category = Category::all();
-    dump($category);
-    return view('welcome');
-});
+ Route::get('/', SiteController::class);
+// Route::get('/', function () {
+    
+//     // Storage::temporaryUrl('1.txt', now()->addMinutes(5));
+//     // Storage::disk('app/public')->put('1.txt', 'olololo');
+//     // Storage::url('aviator.txt');
+    
+// // Route::get('any_file', function(){
+// //     return Storage::download('1.txt');
+// // });
+
+//     // $category = Category::all();
+//     // dump($category);
+//     // return view('welcome');
+// }
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('/admin')->group(function(){
+Route::prefix('/admin')->middleware('auth')->group(function(){
     // Categories
-    Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index']);
+    Route::get('/', [\App\Http\Controllers\Admin\MyController::class, 'index'])->withoutMiddleware('auth');
     // Route::resource('categories', CategoryController::class)
     // ->except(['show']);
     Route::resources([
