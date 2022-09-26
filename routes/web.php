@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\MyController;
 // use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\SiteController;
 use App\Http\Middleware\MyMiddleware;
 use App\Models\Article;
 use App\Models\Category;
@@ -24,20 +25,21 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/', function () {
+ Route::get('/', SiteController::class);
+// Route::get('/', function () {
     
-    // Storage::temporaryUrl('1.txt', now()->addMinutes(5));
-    // Storage::disk('app/public')->put('1.txt', 'olololo');
-    // Storage::url('aviator.txt');
+//     // Storage::temporaryUrl('1.txt', now()->addMinutes(5));
+//     // Storage::disk('app/public')->put('1.txt', 'olololo');
+//     // Storage::url('aviator.txt');
     
-// Route::get('any_file', function(){
-//     return Storage::download('1.txt');
-// });
+// // Route::get('any_file', function(){
+// //     return Storage::download('1.txt');
+// // });
 
-    $category = Category::all();
-    dump($category);
-    return view('welcome');
-});
+//     // $category = Category::all();
+//     // dump($category);
+//     // return view('welcome');
+// }
 
 Auth::routes();
 
