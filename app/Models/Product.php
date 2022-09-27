@@ -29,5 +29,11 @@ class Product extends Model
         return 'https://i.pinimg.com/736x/98/b9/52/98b952001792e2b836669abf4d853712.jpg';
     }
 
+    public function setImageAttribute($value){
+        $this->attributes['image'] = Str::lower($value);
+    }
     
+    public function category(){
+        return $this->belongsTo(Category::class); //return $this->belongsTo('Category::class', 'category_id', 'id');
+    }
 }
