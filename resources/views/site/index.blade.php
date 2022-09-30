@@ -117,7 +117,11 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<form action="{{ route('add_to_cart') }}" method="POST">
+													@csrf
+													<input type="hidden" name="product" value="{{ $product->id }}">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												</form>
 											</div>
 										</div>
 										<!-- /product -->

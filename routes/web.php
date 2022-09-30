@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\MyController;
 // use App\Http\Controllers\Admin\product\ProductController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\StoreController;
@@ -13,9 +14,11 @@ use App\Http\Middleware\MyMiddleware;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Product;
+// use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +33,36 @@ use Illuminate\Support\Facades\Storage;
 
  Route::get('/', SiteController::class);
  Route::get('/catalog', StoreController::class);
- Route::get('/cart',[ CartController::class, 'getCart']);
- Route::get('/add_to_cart', [CartController::class, 'addToCart']);
- Route::get('/test', function(){
+ Route::get('/cart',[ CartController::class, 'getCart'])->name('cart');
+ Route::post('/add_to_cart', [CartController::class, 'addToCart'])->name('add_to_cart');
+
+
+
+ Route::post('/test', function(Request $request){
+    $data = $request->all();
+    return response($data, 201);
+    // return response()->json($data);
+    return response()->setStatusCode(401);
+
+//     $data = [
+//         'name' => 'vi',
+//         'lastname' => 'Skrip',
+//         'child' => [
+//             'boy' => 'jjjj',
+//             'girl' => 'ksg'
+//         ]
+//         ];
+//    json_encode($data);
+//    dump(json_encode($data));
+
+
+    
     //$product = Product::inRandomOrder()->first();
     //$category = Category::findOrFail($product->category_id);
     //$category = Category::inRandomOrder()->first();
-    $category = Category::find(1);
+    // $category = Category::find(1);
 
-    dd($category->products()->where('active', 1));
+    // dd($category->products()->where('active', 1));
  });
 // Route::get('/', function () {
     
