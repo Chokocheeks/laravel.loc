@@ -33,6 +33,7 @@ use Illuminate\Http\Request;
 
  Route::get('/', SiteController::class);
  Route::get('/catalog', StoreController::class);
+ Route::get('/catalog/{category_id}/{product_id}', [StoreController::class, 'product'])->name('product_page');
  Route::get('/cart',[ CartController::class, 'getCart'])->name('cart');
  Route::post('/add_to_cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 
