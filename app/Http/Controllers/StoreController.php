@@ -21,7 +21,7 @@ class StoreController extends Controller
     }
 
     public function product(Request $request, $category_id, $product_id){
-        $product = Product::where('active', 2)
+        $product = Product::where('active', 1)
         ->where('category_id', $category_id)
         ->where('id', $product_id)
         ->first();
