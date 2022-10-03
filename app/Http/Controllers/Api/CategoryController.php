@@ -32,7 +32,13 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->all());
         
-        return response()->json($category, 201);
+        return response()->json($category, 201); 
+        // try{
+        //     $category =  $category = Category::create($request->all());
+        // }catch(\Exception $exceptions){
+
+        //     return response()->json(new CategoryResource($category))->getStatusCode(201);
+        // }
     }
 
     /**
@@ -45,6 +51,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         return new CategoryResource($category);
+
     }
 
     /**
@@ -66,8 +73,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, $id)
     {
+        $category = Category::findOrFail($id);
         $category->delete();
         return response([
             'message' => "Category Deleted successfully!",

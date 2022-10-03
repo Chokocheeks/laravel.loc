@@ -30,4 +30,4 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 // Route::put('/categories/{id}', [CategoryController::class, 'update']);  +
 // Route::delete('/categories/{id}', [CategoryController::class, 'delete']); +
 
-Route::resource('/categories', CategoryController::class);
+Route::apiResource('/categories', CategoryController::class);
