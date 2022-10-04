@@ -1,8 +1,7 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
         @extends('layouts.site')
         @section('content')
-            
-      
+
         <!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -102,7 +101,7 @@
 											</div>
 											<div class="product-body">
 												<p class="product-category">Category</p>
-												<h3 class="product-name"><a href="#">{{ $product->name }}</a></h3>
+												<h3 class="product-name"><a href="{{ route('product_page', ["category_id" => $product->category_id, "product_id" => $product->id]) }}">{{ $product->name }}</a></h3>
 												<h4 class="product-price">{{ $product->price/100 }}.{{ $product->price%100 }}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
@@ -118,7 +117,11 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<form action="{{ route('add_to_cart') }}" method="POST">
+													@csrf
+													<input type="hidden" name="product" value="{{ $product->id }}">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												</form>
 											</div>
 										</div>
 										<!-- /product -->

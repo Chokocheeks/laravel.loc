@@ -13,4 +13,10 @@ class Category extends Model
     #protected $table = 'catalog_categories';
     #protected $primaryKey = 'category_id';
     // protected $guarded = ['id'];
+
+    public function products(){
+        return $this->hasMany(Product::class); 
+        //return $this->hasMany(Product::class, 'category_id', 'id');
+        //$this->belongsToMany(Product::class, 'role_user', 'category_id', 'product_id');
+    }
 }
