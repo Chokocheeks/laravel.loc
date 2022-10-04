@@ -14,11 +14,13 @@ use App\Http\Middleware\MyMiddleware;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Product;
+use GuzzleHttp\Client;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,46 +41,40 @@ use Illuminate\Http\Request;
 
 
 
- Route::post('/test', function(Request $request){
-    $data = $request->all();
-    return response($data, 201);
-    // return response()->json($data);
-    return response()->setStatusCode(401);
+ Route::get('/test', function(Request $request){
+    // $client = new Client();
+    // $query = [
+    //     'ondate' => '2016-7-1',
+    //     'periodicity'=> '1'
+    // ];
+    // $client = new Client([
+    //     'base_uri' => 'https://www.nbrb.by/api/'
+    // ]);
+    // $response = $client->get('exrates/rates/145',['query' => $query]);
+    // $response = $client->get('exrates/rates',['query' => $query]);
 
-//     $data = [
-//         'name' => 'vi',
-//         'lastname' => 'Skrip',
-//         'child' => [
-//             'boy' => 'jjjj',
-//             'girl' => 'ksg'
-//         ]
-//         ];
-//    json_encode($data);
-//    dump(json_encode($data));
+    // dd(json_decode(($response->getBody()->getContents()), true));
+
+    // $responce = Http::
+    // // accept('application/json')
+    // acceptJson()
+    // ->get('https://www.nbrb.by/api/exrates/rates/145?ondate=2016-7-1&periodicity=1');
+    // if($responce->failed()){
+    //     switch(true){
+    //         case $responce->clientError();
+    //             # code...
+    //             break;
+    //         case $responce->serverError():
+    //             # code...
+    //             break;
+    //     }
+    // }
+    // dd($responce->body());
 
 
-    
-    //$product = Product::inRandomOrder()->first();
-    //$category = Category::findOrFail($product->category_id);
-    //$category = Category::inRandomOrder()->first();
-    // $category = Category::find(1);
-
-    // dd($category->products()->where('active', 1));
+    return view('test');
  });
-// Route::get('/', function () {
-    
-//     // Storage::temporaryUrl('1.txt', now()->addMinutes(5));
-//     // Storage::disk('app/public')->put('1.txt', 'olololo');
-//     // Storage::url('aviator.txt');
-    
-// // Route::get('any_file', function(){
-// //     return Storage::download('1.txt');
-// // });
 
-//     // $category = Category::all();
-//     // dump($category);
-//     // return view('welcome');
-// }
 
 Auth::routes();
 
@@ -96,21 +92,4 @@ Route::prefix('/admin')->middleware('auth')->group(function(){
         'articles' => ArticleController::class
     ]);
 
-
-
-
-
-    // Route::get('/categories', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    // Route::get('/categories/create', [CategoryController::class, 'create']);
-    
-    // Route::post('/categories/create', [CategoryController::class, 'store']);
-    
-    // Route::get('/categories/{category}/edit', [CategoryController::class, 'edit']);
-    
-    // Route::put('/categories/{category}/update', [CategoryController::class, 'update']);
-    
-    // Route::delete('/categories/{category}/delete', [CategoryController::class, 'delete']);
-
-    // Product
-    // Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 });
