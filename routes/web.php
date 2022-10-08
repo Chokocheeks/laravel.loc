@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\MyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\StoreController;
 use App\Http\Middleware\MyMiddleware;
+use App\Mail\FirstMail;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Product;
@@ -21,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,4 +95,72 @@ Route::prefix('/admin')->middleware('auth')->group(function(){
         'articles' => ArticleController::class
     ]);
 
+});
+//currency-convert
+Route::get('currency', function (Request $request){
+   
+    $responce = Http::get('https://www.nbrb.by/api/exrates/currencies');
+    $currencies = $responce->collect()->keyBy('Cur_Abbreviation');
+    
+    return view('currency', compact('currencies'));
+});
+Route::post('currency', function (Request $request){
+    $query = ['pereodicity' => 0];
+    $responce = Http::get('https://www.nbrb.by/api/exrates/rates', $query);
+    dd($responce->collect()->keyBy('Cur_Abbreviation'));
+    
+});
+
+
+//weather
+Route::get('/weather', function(Request $request){
+    $query = [
+        // 'key' => '79d1b317825f43db8af163400220510',
+        'key' => env('WEATHER_AOI_KEY'),
+        'q' => 'Minsk',
+        'dt' => '1989-08-31'
+    ];
+    $client = Http::baseUrl('http://api.weatherapi.com/v1');
+    $responce = $client->get('/current.json', $query);
+    dump($responce['current']['temp_c'].' in '.$responce['location']['region']);
+    dd($responce->json());
+});
+
+// Route::get('/giphy',function(Request $request){
+//     $query = [
+//         'api_key' => 'QktM1VYRUFP5y7Y5fRp4ynMqxlbeTVGf',
+//         'limit' => '25',
+//         'rating' => 'g'
+//     ];
+//     $responce = Http::get('https://api.giphy.com/v1/gifs/trending', $query);
+//     // dd($responce->json());
+//     foreach($responce->collect(['data']) as $gif){
+//         echo "<video autoplay loop src='{$gif['embed_url']}'></>";
+//     }
+// });
+
+// Route::get('/giphy',function(Request $request){
+//     $query = [
+//         'lang' => 'ru',
+//         'type' => 'json'
+//     ];
+//     $responce = Http::get('https://evilinsult.com/generate_insult.php', $query);
+//     dd($responce->json());
+    
+// });
+
+// Route::get('/giphy',function(Request $request){
+//     $query = [
+//         'lang' => 'ru',
+//         'type' => 'json'
+//     ];
+//     $responce = Http::get('https://evilinsult.com/generate_insult.php', $query);
+//     dd($responce->json());
+    
+// });
+
+Route::get('/giphy',function(Request $request){
+    $mail = new FirstMail('hello mail');
+    Mail::send($mail);
+    
 });
