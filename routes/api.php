@@ -31,3 +31,5 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 // Route::delete('/categories/{id}', [CategoryController::class, 'delete']); +
 
 Route::apiResource('/categories', CategoryController::class);
+
+
