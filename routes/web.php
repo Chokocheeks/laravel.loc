@@ -173,6 +173,13 @@ Route::get('/day', function(Request $request){
     return view('day', compact('quote'));
 });
 
+Route::get('advice', function(Request $request){
+    $responce = Http::get('https://api.adviceslip.com/advice');
+    $advice = [$responce->json()][0]['slip']["advice"];
+    // dd($advice);
+    return view('advice', compact('advice'));
+});
+
 // Route::get('/minion', function(Request $request){
 //     $query = [
 //         'text' => 'maybe'
