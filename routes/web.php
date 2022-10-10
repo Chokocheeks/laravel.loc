@@ -159,8 +159,45 @@ Route::get('/weather', function(Request $request){
     
 // });
 
-Route::get('/giphy',function(Request $request){
-    $mail = new FirstMail('hello mail');
-    Mail::send($mail);
+// Route::get('/giphy',function(Request $request){
+//     $mail = new FirstMail('hello mail');
+//     Mail::send($mail);
     
+// });
+
+Route::get('/day', function(Request $request){
+    
+    $responce = Http::get('https://favqs.com/api/qotd');
+    $quote = [$responce->json()][0]['quote'];
+    // dd($responce->json());
+    return view('day', compact('quote'));
 });
+
+Route::get('advice', function(Request $request){
+    $responce = Http::get('https://api.adviceslip.com/advice');
+    $advice = [$responce->json()][0]['slip']["advice"];
+    // dd($advice);
+    return view('advice', compact('advice'));
+});
+
+// Route::get('/minion', function(Request $request){
+//     $query = [
+//         'text' => 'maybe'
+//     ];
+//     $responce = Http::post('https://api.funtranslations.com/translate/minion.json', $query);
+//     dump($_POST);
+//     $text = $responce->json();
+//     dd($text);
+//     return view('minion', compact('quote'));
+// });
+
+
+// Route::get('/giphy', function(){
+//     // $responce = Http::get('https://favqs.com/api/qotd');
+//     // $quote = [$responce->json()][0]['quote']['body'];
+
+//     Http::post('https://api.tlgr.org/bot5779101922:AAGWPvloaakYSGTXUP3wnl9Dr9EDy_mxY80/sendMessage', [
+//         'chat_id' => -1001788886139,
+//         'message' => 'hi'
+//     ]);
+// });
