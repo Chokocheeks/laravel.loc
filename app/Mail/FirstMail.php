@@ -16,6 +16,11 @@ class FirstMail extends Mailable
      *
      * @return void
      */
+
+    public $mailMessage;
+    public $tries = 3;
+
+
     public function __construct($mailMessage)
     {
         $this->mailMessage = $mailMessage;

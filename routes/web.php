@@ -12,6 +12,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\StoreController;
 use App\Http\Middleware\MyMiddleware;
+use App\Jobs\FirstJob;
 use App\Mail\FirstMail;
 use App\Models\Article;
 use App\Models\Category;
@@ -159,11 +160,12 @@ Route::get('/weather', function(Request $request){
     
 // });
 
-// Route::get('/giphy',function(Request $request){
-//     $mail = new FirstMail('hello mail');
-//     Mail::send($mail);
-    
-// });
+Route::get('/giphy',function(Request $request){
+    // $job = new FirstJob;
+    // $job->dispatch();
+    FirstJob::dispatch('alloha, dear monkey');
+    // FirstJob::dispatchAfterResponse('alloha, dear Lady')->onQueue('payment');
+});
 
 Route::get('/day', function(Request $request){
     
