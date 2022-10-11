@@ -160,11 +160,11 @@ Route::get('/weather', function(Request $request){
     
 // });
 
-Route::get('/giphy',function(Request $request){
-    $mail = new FirstMail('hello mail', 'hulu$gmaul.com');
-    Mail::send($mail);
+// Route::get('/giphy',function(Request $request){
+//     $mail = new FirstMail('hello mail', 'hulu$gmaul.com');
+//     Mail::send($mail);
 
-});
+// });
 
 Route::get('/giphy',function(Request $request){
     // $job = new FirstJob;

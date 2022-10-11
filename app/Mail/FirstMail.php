@@ -20,12 +20,14 @@ class FirstMail extends Mailable
     public $mailMessage;
     public $tries = 3;
     public $mailTo;
+    public $details;
 
 
-    public function __construct($mailMessage, $mailTo)
+    public function __construct($mailTo, $details)
     {
-        $this->mailMessage = $mailMessage;
+        // $this->mailMessage = $mailMessage;
         $this->mailTo = $mailTo;
+        $this->details = $details;
     }
 
     /**
@@ -41,7 +43,8 @@ class FirstMail extends Mailable
         ->view('emails.first')
         ->with([
             'message2' => 'Your currency rate',
-            'mailMessage' => $this->mailMessage
+            // 'mailMessage' => $this->mailMessage,
+            'details' => $this->details
         ]);
     }
 }

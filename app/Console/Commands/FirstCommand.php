@@ -48,8 +48,13 @@ class FirstCommand extends Command
             $Cur_Abbreviation = strtoupper($this->ask('What currency rate do you want to know?'));
             $email = $this->ask('What is your email?');
             $responce = Http::get('https://www.nbrb.by/api/exrates/rates/'.$Cur_Abbreviation.'?parammode=2 ');
-            $this->info($responce);
-            $mail = new FirstMail($responce->collect(), $email);
+            $details = [
+                'Currency' => $responce['Cur_Name'],
+                'Cur_Scale' => $responce['Cur_Scale'],
+                'Cur_OfficialRate' => $responce['Cur_OfficialRate']
+            ];
+            $mail = new FirstMail($email, $details);
+            // $this->info($mail);
             Mail::send($mail);
             
         $this->info('Send currency rates - successfully!');
