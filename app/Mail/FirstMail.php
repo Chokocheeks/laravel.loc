@@ -19,11 +19,13 @@ class FirstMail extends Mailable
 
     public $mailMessage;
     public $tries = 3;
+    public $mailTo;
 
 
-    public function __construct($mailMessage)
+    public function __construct($mailMessage, $mailTo)
     {
         $this->mailMessage = $mailMessage;
+        $this->mailTo = $mailTo;
     }
 
     /**
@@ -34,11 +36,11 @@ class FirstMail extends Mailable
     public function build()
     {
         return $this->from('choko@mail.ru', 'Choko Prodaction')
-        ->to('pigasi4ek@mail.ru')
+        ->to($this->mailTo)
         ->cc(['vip1@mail.ru', 'vip2@mail.ru'])
         ->view('emails.first')
         ->with([
-            'message2' => 'alohha cruel',
+            'message2' => 'Your currency rate',
             'mailMessage' => $this->mailMessage
         ]);
     }
