@@ -4,28 +4,29 @@ namespace App\Providers;
 
 use App\Contracts\CurServiceInteface;
 use App\Services\AnotherCurService;
-use App\Services\CurrencyService;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class DiProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
         
+
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-     
+        $this->app->bind(CurServiceInteface::class, AnotherCurService::class);
+        // $this->app->singleton(CurServiceInteface::class, new AnotherCurService);
     }
 }

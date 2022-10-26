@@ -56,6 +56,8 @@
 		</div>
 		<!-- /SECTION -->
 
+		<x-alert :h1="'Hello_me'"/>
+
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->

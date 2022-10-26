@@ -34,11 +34,14 @@ class RateCommand extends Command
         
         $query = ['pereodicity' => 0];
         $responce = Http::get('https://www.nbrb.by/api/exrates/rates', $query);
-        $rate = [
-            'count' => $responce['Cur_Scale'],
-            'name' => $responce['Cur_Name'],
-            'rate' => $responce['Cur_OfficialRate']        
-        ];
+        $currencies = $responce->json();
+        foreach ($currencies as $currency){
+            $rate = [
+                'count' => $currency['Cur_Scale'],
+                'name' => $currency['Cur_Name'],
+                'rate' => $currency['Cur_OfficialRate']        
+            ];
+        }
         
         Rate::create($rate);
     }
