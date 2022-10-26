@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\ProductAddedEvent;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -17,14 +18,19 @@ use App\Mail\FirstMail;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use GuzzleHttp\Client;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,37 +52,31 @@ use Illuminate\Support\Facades\Mail;
 
 
  Route::get('/test', function(Request $request){
-    // $client = new Client();
-    // $query = [
-    //     'ondate' => '2016-7-1',
-    //     'periodicity'=> '1'
-    // ];
-    // $client = new Client([
-    //     'base_uri' => 'https://www.nbrb.by/api/'
+
+    dd(Redis::get('my_int'));
+    
+
+    // Log::channel('slack')->info('blahBlahBlah', [
+    //     'name' => 'blow'
     // ]);
-    // $response = $client->get('exrates/rates/145',['query' => $query]);
-    // $response = $client->get('exrates/rates',['query' => $query]);
 
-    // dd(json_decode(($response->getBody()->getContents()), true));
+    // Product::create(['']);
 
-    // $responce = Http::
-    // // accept('application/json')
-    // acceptJson()
-    // ->get('https://www.nbrb.by/api/exrates/rates/145?ondate=2016-7-1&periodicity=1');
-    // if($responce->failed()){
-    //     switch(true){
-    //         case $responce->clientError();
-    //             # code...
-    //             break;
-    //         case $responce->serverError():
-    //             # code...
-    //             break;
-    //     }
-    // }
-    // dd($responce->body());
+    
+
+    // $event = new ProductAddedEvent();
 
 
-    return view('test');
+    // $user = User::query()->inRandomOrder()->first();
+    // ProductAddedEvent::dispatch($user);
+
+
+    // Event::dispatch($event);
+
+
+
+    // App::setLocale('ru');
+    // dd(__('welcome.welcome_text', ['name' => 'Amigo'] ));
  });
 
 
